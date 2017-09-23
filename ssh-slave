@@ -1,0 +1,1 @@
+docker-compose exec slave /bin/bash
