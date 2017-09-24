@@ -1,4 +1,12 @@
-echo "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main" >> /etc/apt/sources.list.d/pgdg.list
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-sudo apt-get update
-sudo apt-get install -y postgresql-9.6
+# Add PG apt repo:
+echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+
+# Add PGDG repo key:
+wget --quiet -O - https://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | apt-key add -
+
+apt-get update
+apt-get -y upgrade
+apt-get install -y postgresql-contrib-9.6 postgresql-9.6
+
+echo "Successfully created PostgreSQL dev virtual machine."
+echo ""

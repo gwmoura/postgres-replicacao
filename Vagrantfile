@@ -14,19 +14,27 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "ubuntu/trusty64"
 
-  config.vm.define "master", primary: true do |master|
-    master.vm.network "private_network", ip: "10.5.0.5"
-    master.vm.provision "file", source: "./master/pg_hba.conf", destination: "/etc/postgresql/9.6/main/pg_hba.conf"
-    master.vm.provision "file", source: "./master/postgresql.conf", destination: "/etc/postgresql/9.6/main/postgresql.conf"
+  config.vm.define "master" do |master|
+    # master.vm.network "private_network", ip: "19.168.33.10"
+    master.vm.hostname = "pgmaster"
+    master.vm.network "public_network"
+    # master.vm.provision "shell", path: "scripts/install_postgres.sh"
+    master.vm.provision "shell", path: "scripts/setup_master.sh"
+    # master.vm.provider :virtualbox do |v|
+    #   v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    # end
   end
 
   config.vm.define "slave" do |slave|
-    slave.vm.network "private_network", ip: "10.5.0.6"
-    slave.vm.provision "file", source: "./slave/pg_hba.conf", destination: "/etc/postgresql/9.6/main/pg_hba.conf"
-    slave.vm.provision "file", source: "./slave/postgresql.conf", destination: "/etc/postgresql/9.6/main/postgresql.conf"
+    # slave.vm.network "private_network", ip: "192.168.33.11"
+    slave.vm.hostname = "pgslave"
+    slave.vm.network "public_network"
+    # slave.vm.provision "shell", path: "scripts/install_postgres.sh"
+    slave.vm.provision "shell", path: "scripts/setup_slave.sh"
+    # slave.vm.provider :virtualbox do |v|
+    #   v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    # end
   end
-
-  config.vm.provision "shell", path: "scripts/install_postgres.sh"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -65,8 +73,8 @@ Vagrant.configure("2") do |config|
   #
   # config.vm.provider "virtualbox" do |vb|
   #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
+  #   # vb.gui = true
+
   #   # Customize the amount of memory on the VM:
   #   vb.memory = "1024"
   # end
