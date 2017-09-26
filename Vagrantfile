@@ -15,9 +15,9 @@ Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/trusty64"
 
   config.vm.define "master" do |master|
-    # master.vm.network "private_network", ip: "19.168.33.10"
+    master.vm.network "private_network", ip: "192.168.33.10"
     master.vm.hostname = "pgmaster"
-    master.vm.network "public_network"
+    # master.vm.network "public_network"
     # master.vm.provision "shell", path: "scripts/install_postgres.sh"
     master.vm.provision "shell", path: "scripts/setup_master.sh"
     # master.vm.provider :virtualbox do |v|
@@ -26,9 +26,9 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "slave" do |slave|
-    # slave.vm.network "private_network", ip: "192.168.33.11"
+    slave.vm.network "private_network", ip: "192.168.33.11"
     slave.vm.hostname = "pgslave"
-    slave.vm.network "public_network"
+    # slave.vm.network "public_network"
     # slave.vm.provision "shell", path: "scripts/install_postgres.sh"
     slave.vm.provision "shell", path: "scripts/setup_slave.sh"
     # slave.vm.provider :virtualbox do |v|
