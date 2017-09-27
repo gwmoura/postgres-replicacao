@@ -9,3 +9,7 @@ sudo cp /vagrant/master/id_rsa* /var/lib/postgresql/.ssh/
 sudo cp /vagrant/master/pg_hba.conf /etc/postgresql/9.6/main/pg_hba.conf
 sudo cp /vagrant/master/postgresql.conf /etc/postgresql/9.6/main/postgresql.conf
 service postgresql restart
+
+# psql -c "select pg_start_backup('initial_backup');"
+# rsync -cva --inplace --exclude=*pg_xlog* /var/lib/postgresql/9.6/main/ 192.168.33.11:/var/lib/postgresql/9.6/main/
+# psql -c "select pg_stop_backup();"

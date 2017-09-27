@@ -8,5 +8,5 @@ su postgres -c "chmod 0600 ~/.ssh/authorized_keys"
 sudo cp /vagrant/slave/id_rsa* /var/lib/postgresql/.ssh/
 sudo cp /vagrant/slave/pg_hba.conf /etc/postgresql/9.6/main/pg_hba.conf
 sudo cp /vagrant/slave/postgresql.conf /etc/postgresql/9.6/main/postgresql.conf
-sudo cp /vagrant/slave/recovery.conf /etc/postgresql/9.6/main/recovery.conf
+sudo cp /vagrant/slave/recovery.conf /var/lib/postgresql/9.6/main/recovery.conf
 sudo service postgresql restart
