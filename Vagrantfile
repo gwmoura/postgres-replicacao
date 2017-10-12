@@ -12,28 +12,24 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "centos/7"
 
   config.vm.define "master" do |master|
     master.vm.network "private_network", ip: "192.168.33.10"
     master.vm.hostname = "pgmaster"
-    # master.vm.network "public_network"
-    # master.vm.provision "shell", path: "scripts/install_postgres.sh"
-    master.vm.provision "shell", path: "scripts/setup_master.sh"
-    # master.vm.provider :virtualbox do |v|
-    #   v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-    # end
+    # master.vm.provision "shell", path: "scripts/setup_master.sh"
   end
 
   config.vm.define "slave" do |slave|
     slave.vm.network "private_network", ip: "192.168.33.11"
     slave.vm.hostname = "pgslave"
-    # slave.vm.network "public_network"
-    # slave.vm.provision "shell", path: "scripts/install_postgres.sh"
-    slave.vm.provision "shell", path: "scripts/setup_slave.sh"
-    # slave.vm.provider :virtualbox do |v|
-    #   v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-    # end
+    # slave.vm.provision "shell", path: "scripts/setup_slave.sh"
+  end
+
+  config.vm.define "slave2" do |slave|
+    slave.vm.network "private_network", ip: "192.168.33.12"
+    slave.vm.hostname = "pgslave2"
+    # slave.vm.provision "shell", path: "scripts/setup_slave.sh"
   end
 
   # Disable automatic box update checking. If you disable this, then

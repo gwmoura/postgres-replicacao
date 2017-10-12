@@ -1,12 +1,11 @@
 # Add PG apt repo:
-echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/apt/sources.list.d/pgdg.list
-
-# Add PGDG repo key:
-wget --quiet -O - https://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | apt-key add -
-
-apt-get update
-apt-get -y upgrade
-apt-get install -y postgresql-contrib-9.6 postgresql-9.6
-
+wget https://github.com/gwmoura/bash-scripts/raw/master/postgres.sh
+sh postgres.sh
+sleep 1
+mkdir -p /opt/pg-bkp/archives/
+chown -R postgres:postgres /opt/pg-bkp/archives/
+chown -R postgres:postgres /opt/postgres/9.6.5
+chown -R postgres:postgres /var/log/postgresql/
+source /etc/profile.d/postgres_envs.sh
 echo "Successfully created PostgreSQL dev virtual machine."
 echo ""
