@@ -1,22 +1,35 @@
+#### passos
 
+* `vagrant up`
 
-1 - gere a chave ssh com senha em branco, faça isso no servidor master e no slave
+#### config master
 
-`ssh-keygen -t rsa`
+* `vagrant ssh master`
+* `sudo su` - para logar como root
+* `cd /opt`
+* `/vagrant/scripts/setup_master.sh`
+* `su postgres`
+* `source /etc/profile.d/postgres_envs.sh`
+* `psql`
 
-2 - Copie a sua chave para o servidor slave
+#### config slaves
 
-`ssh-copy-id vagrant@[ip_do_servidor_slave]`
+#### slave1
+* `vagrant ssh slave`
+* `sudo su` - para logar como root
+* `cd /opt`
+* `/vagrant/scripts/setup_slave.sh`
+* `/vagrant/scripts/replicate.sh`
+* `su postgres`
+* `source /etc/profile.d/postgres_envs.sh`
+* `psql`
 
-3 - Copie a sua chave para o servidor master
-
-`ssh-copy-id vagrant@[ip_do_servidor_master]`
-
-Agora você consegue acessar os servidores sem utilizar senha
-
-Faça o seguinte procedimento para adicionar a chave para o usuario postgres
-`su postgres`
-`ssh-keygen`
-`cat ~/.ssh/id_rsa.pub`
-`nano ~/.ssh/authorized_keys`
-`chmod 0600 ~/.ssh/authorized_keys`
+#### slave2
+* `vagrant ssh slave2`
+* `sudo su` - para logar como root
+* `cd /opt`
+* `/vagrant/scripts/setup_slave.sh`
+* `/vagrant/scripts/replicate.sh`
+* `su postgres`
+* `source /etc/profile.d/postgres_envs.sh`
+* `psql`
