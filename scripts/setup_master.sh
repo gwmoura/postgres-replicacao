@@ -8,8 +8,8 @@ echo "postgres" | su postgres -c "psql -c \"create user replicacao REPLICATION p
 
 # config pg_hba.conf
 cp /opt/postgres/9.6.5/data/pg_hba.conf /opt/postgres/9.6.5/data/pg_hba.bkp.conf
-echo "host    replication     replicacao      192.168.33.11/32        md5" >> /opt/postgres/9.6.5/data/pg_hba.conf
-echo "host    replication     replicacao      192.168.33.12/32        md5" >> /opt/postgres/9.6.5/data/pg_hba.conf
+echo "host    replication     replicacao      10.142.0.3/32        md5" >> /opt/postgres/9.6.5/data/pg_hba.conf
+echo "host    replication     replicacao      10.142.0.4/32        md5" >> /opt/postgres/9.6.5/data/pg_hba.conf
 
 # setup postgresql.conf
 POSTGRES_CONF=/opt/postgres/9.6.5/data/postgresql.conf

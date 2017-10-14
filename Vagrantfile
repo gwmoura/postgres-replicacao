@@ -15,19 +15,19 @@ Vagrant.configure("2") do |config|
   config.vm.box = "centos/7"
 
   config.vm.define "master" do |master|
-    master.vm.network "private_network", ip: "192.168.33.10"
+    master.vm.network "private_network", ip: "10.142.0.2"
     master.vm.hostname = "pgmaster"
     # master.vm.provision "shell", path: "scripts/setup_master.sh"
   end
 
   config.vm.define "slave" do |slave|
-    slave.vm.network "private_network", ip: "192.168.33.11"
+    slave.vm.network "private_network", ip: "10.142.0.3"
     slave.vm.hostname = "pgslave"
     # slave.vm.provision "shell", path: "scripts/setup_slave.sh"
   end
 
   config.vm.define "slave2" do |slave|
-    slave.vm.network "private_network", ip: "192.168.33.12"
+    slave.vm.network "private_network", ip: "10.142.0.4"
     slave.vm.hostname = "pgslave2"
     # slave.vm.provision "shell", path: "scripts/setup_slave.sh"
   end

@@ -11,11 +11,11 @@ source /etc/profile.d/postgres_envs.sh
 # This will remove the data directory on the slave - careful!
 echo "postgres" | su postgres -c "pg_ctl stop"
 rm -rf $PGDATA
-echo "postgres" | su postgres -c "echo '12345' | pg_basebackup -h 192.168.33.10 -D $PGDATA -U replicacao -v -P"
+echo "postgres" | su postgres -c "echo '12345' | pg_basebackup -h 10.142.0.2 -D $PGDATA -U replicacao -v -P"
 chown -R postgres:postgres $PGDATA
 rm $PGDATA/recovery.conf
 echo "standby_mode = 'on'" >> $PGDATA/recovery.conf
-echo "primary_conninfo = 'user=replicacao password=12345 host=192.168.33.10 port=5432 sslmode=prefer sslcompression=1 krbsrvname=postgres'" >> $PGDATA/recovery.conf
+echo "primary_conninfo = 'user=replicacao password=12345 host=10.142.0.2 port=5432 sslmode=prefer sslcompression=1 krbsrvname=postgres'" >> $PGDATA/recovery.conf
 chown -R postgres:postgres $PGDATA/recovery.conf
 
 sed -i -e 's/#hot_standby = off/hot_standby = on/g' $PGDATA/postgresql.conf
